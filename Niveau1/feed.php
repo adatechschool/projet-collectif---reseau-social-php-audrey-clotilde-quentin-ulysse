@@ -121,11 +121,13 @@
                     </div>                                            
                     <footer>
                         <small>♥ <?php echo $feed['like_number'] ?></small>
-                        <a href=""> <?php echo $feed['taglist'] ?> </a>
-                        <?php /*while ($tag = $feed['taglist']->fetch_assoc())
+                        <!-- <a href=""> <?php echo $feed['taglist'] ?> </a> -->
+                        <?php 
+                        $tags = explode(",", $feed['taglist']);
+                        foreach ($tags as $tag)
                         { ?>
                             <a href=""><?php echo $tag ?></a>
-                        <?php } */?>
+                        <?php } ?>
                     </footer>
                 </article>
                 <?php } ?>
