@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
+        
     <header>
             <img src="resoc.jpg" alt="Logo de notre réseau social"/>
             <nav id="menu">
@@ -22,6 +23,8 @@
                     <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
                     <li><a href="subscriptions.php?user_id=5">Mes abonnements</a></li>
                 </ul>
+
+    </header>
 
     <div id="wrapper">
         <aside>
