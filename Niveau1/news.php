@@ -10,20 +10,21 @@
 
 <body>
     <header>
-        <a href='admin.php'><img src="resoc.jpg" alt="Logo de notre réseau social" /></a>
+        <img src="resoc.jpg" alt="Logo de notre réseau social" />
         <nav id="menu">
             <a href="news.php">Actualités</a>
-            <a href="wall.php?user_id=5">Mur</a>
-            <a href="feed.php?user_id=5">Flux</a>
-            <a href="tags.php?tag_id=1">Mots-clés</a>
+            <a href="wall.php?<?php echo $user['id'] ?>">Mur</a>
+            <a href="feed.php?<?php echo $user['id'] ?>">Flux</a>
+            <a href="tags.php?<?php echo $user['label'] ?>">Mots-clés</a>
         </nav>
         <nav id="user">
-            <a href="#">▾ Profil</a>
+            <a href="#">Profil</a>
             <ul>
-                <li><a href="settings.php?user_id=5">Paramètres</a></li>
-                <li><a href="followers.php?user_id=5">Mes suiveurs</a></li>
-                <li><a href="subscriptions.php?user_id=5">Mes abonnements</a></li>
+                <li><a href="settings.php?<?php echo $user['id'] ?>">Paramètres</a></li>
+                <li><a href="followers.php?<?php echo $user['id'] ?>">Mes suiveurs</a></li>
+                <li><a href="subscriptions.php?<?php echo $user['id'] ?>">Mes abonnements</a></li>
             </ul>
+
         </nav>
     </header>
     <div id="wrapper">
@@ -110,7 +111,7 @@
             while ($post = $lesInformations->fetch_assoc()) {
                 //la ligne ci-dessous doit etre supprimée mais regardez ce 
                 //qu'elle affiche avant pour comprendre comment sont organisées les information dans votre 
-                echo "<pre>" . print_r($post, 1) . "</pre>";
+                //echo "<pre>" . print_r($post, 1) . "</pre>";
 
                 // @todo : Votre mission c'est de remplacer les AREMPLACER par les bonnes valeurs
                 // ci-dessous par les bonnes valeurs cachées dans la variable $post 
