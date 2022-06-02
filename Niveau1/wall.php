@@ -16,8 +16,8 @@ include('modules.php');
 <body>
     <header>
         <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <?php 
-            echo $navbar
+        <?php
+        echo $navbar
         ?>
     </header>
     <div id="wrapper">
@@ -30,12 +30,6 @@ include('modules.php');
          * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
          */
         $userId = intval($_GET['user_id']);
-        ?>
-        <?php
-        /**
-         * Etape 2: se connecter à la base de donnée
-         */
-        $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
         ?>
 
         <aside>

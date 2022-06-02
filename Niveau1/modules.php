@@ -1,5 +1,5 @@
-<?php 
- $navbar = '
+<?php
+$navbar = '
  <nav id="menu">
     <a href="news.php">Actualités</a>
     <a href="wall.php?user_id=5">Mur</a>
@@ -15,12 +15,15 @@
     </ul>
 
 </nav>'
+
 ?>
 
-<?php 
-    function navbar_link($link, $name){
-        $output = "<a href=$link>$name</a>";
-        return $output;
-    }
-?>
+<?php $mysqli = new mysqli("localhost", "root", "root", "socialnetwork"); ?>;
 
+<?php
+function navbar_link($link, $name)
+{
+    $output = "<a href=$link>$name</a>";
+    return $output;
+}
+?>

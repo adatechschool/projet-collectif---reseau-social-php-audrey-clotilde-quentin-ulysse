@@ -16,8 +16,8 @@ include('modules.php');
 <body>
     <header>
         <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <?php 
-            echo $navbar
+        <?php
+        echo $navbar
         ?>
     </header>
     <div id="wrapper" class='profile'>
@@ -44,11 +44,8 @@ include('modules.php');
             $userId = intval($_GET['user_id']);
 
             /**
-             * Etape 2: se connecter à la base de donnée
-             */
-            $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
-
-            /**
+           
+            
              * Etape 3: récupérer le nom de l'utilisateur
              */
             $laQuestionEnSql = "
