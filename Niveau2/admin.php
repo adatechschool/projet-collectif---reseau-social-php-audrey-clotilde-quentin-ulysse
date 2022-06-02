@@ -16,8 +16,8 @@ include('modules.php');
 <body>
     <header>
         <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <?php 
-            echo $navbar
+        <?php
+        echo $navbar
         ?>
     </header>
 
@@ -28,8 +28,7 @@ include('modules.php');
 
     //ouvrir une connecxion à la BDD
 
-    // on va en avoir besoin pour la suite
-     #appel BDD
+
     //verification
     if ($mysqli->connect_errno) {
         echo ("Échec de la connexion : " . $mysqli->connect_error);
