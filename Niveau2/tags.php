@@ -1,8 +1,9 @@
-<!doctype html>
-
 <?php
 include('modules.php');
 ?>
+<!doctype html>
+
+
 
 <html lang="fr">
 
@@ -16,8 +17,8 @@ include('modules.php');
 <body>
     <header>
         <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <?php 
-            echo $navbar
+        <?php
+        echo $navbar
         ?>
     </header>
     <div id="wrapper">
