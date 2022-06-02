@@ -5,60 +5,64 @@ include('modules.php');
 ?>
 
 <html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <title>ReSoC - Flux</title>
-    <meta name="author" content="Julien Falconnet">
-    <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-    <header>
-        <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <?php
-        echo $navbar
-        ?>
-    </header>
-    <div id="wrapper">
-        <?php
-        /**
-         * Cette page est TRES similaire à wall.php. 
-         * Vous avez sensiblement à y faire la meme chose.
-         * Il y a un seul point qui change c'est la requete sql.
-         */
-        /**
-         * Etape 1: Le mur concerne un utilisateur en particulier
-         */
-        $userId = intval($_GET['user_id']);
-        ?>
-
-        <aside>
-            <?php
-            /**
-             * Etape 3: récupérer le nom de l'utilisateur
-             */
-            $laQuestionEnSql = "SELECT * FROM `users` WHERE id= '$userId' ";
-            $lesInformations = $mysqli->query($laQuestionEnSql);
-            $user = $lesInformations->fetch_assoc();
-            //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
-            //echo "<pre>" . print_r($user, 1) . "</pre>";
+    <head>
+        <meta charset="utf-8">
+        <title>ReSoC - Flux</title>         
+        <meta name="author" content="Julien Falconnet">
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <header>
+            <img src="resoc.jpg" alt="Logo de notre réseau social"/>
+            <?php 
+                echo $navbar
             ?>
-            <img src="user.jpg" alt="Portrait de l'utilisatrice" />
-            <section>
-                <h3>Présentation</h3>
-                <p>Sur cette page vous trouverez tous les message des utilisatrices
-                    auxquelles est abonnée <?php echo $user['alias'] ?>
-                </p>
-
-            </section>
-        </aside>
-        <main>
+        </header>
+        <div id="wrapper">
             <?php
             /**
-             * Etape 3: récupérer tous les messages des abonnements
+             * Cette page est TRES similaire à wall.php. 
+             * Vous avez sensiblement à y faire la meme chose.
+             * Il y a un seul point qui change c'est la requete sql.
              */
-            $laQuestionEnSql = "
+            /**
+             * Etape 1: Le mur concerne un utilisateur en particulier
+             */
+            $userId = intval($_GET['user_id']);
+            ?>
+            <?php
+            /**
+             * Etape 2: se connecter à la base de donnée
+             */
+            $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
+            ?>
+
+            <aside>
+                <?php
+                /**
+                 * Etape 3: récupérer le nom de l'utilisateur
+                 */
+                $laQuestionEnSql = "SELECT * FROM `users` WHERE id= '$userId' ";
+                $lesInformations = $mysqli->query($laQuestionEnSql);
+                $user = $lesInformations->fetch_assoc();
+                //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
+                //echo "<pre>" . print_r($user, 1) . "</pre>";
+                ?>
+                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <section>
+                    <h3>Présentation</h3>
+                    <p>Sur cette page vous trouverez tous les message des utilisatrices
+                        auxquelles est abonnée <?php echo $user['alias'] ?>
+                    </p>
+
+                </section>
+            </aside>
+            <main>
+                <?php
+                /**
+                 * Etape 3: récupérer tous les messages des abonnements
+                 */
+                $laQuestionEnSql = "
                     SELECT posts.content,
                     posts.created,
                     users.alias as author_name,  
@@ -74,24 +78,28 @@ include('modules.php');
                     GROUP BY posts.id
                     ORDER BY posts.created DESC  
                     ";
-            $lesInformations = $mysqli->query($laQuestionEnSql);
-            if (!$lesInformations) {
-                echo ("Échec de la requete : " . $mysqli->error);
-            }
+                $lesInformations = $mysqli->query($laQuestionEnSql);
+                if ( ! $lesInformations)
+                {
+                    echo("Échec de la requete : " . $mysqli->error);
+                }
 
-            /**
-             * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
-             * A vous de retrouver comment faire la boucle while de parcours...
-             */
-            while ($feed = $lesInformations->fetch_assoc()) {
+                /**
+                 * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
+                 * A vous de retrouver comment faire la boucle while de parcours...
+                 */
+                while ($feed = $lesInformations->fetch_assoc())
+                {
 
-                //echo "<pre>" . print_r($feed, 1) . "</pre>";
-            ?>
-
-
+                    //echo "<pre>" . print_r($feed, 1) . "</pre>";
+                ?>
+                    
+                    
                 <article>
                     <h3>
-                        <time datetime=<?php echo $feed['created'] ?>>
+                        <time datetime=
+                            <?php echo $feed['created'] ?>
+                        >
                             <?php echo $feed['created'] ?>
                         </time>
                     </h3>
@@ -102,23 +110,23 @@ include('modules.php');
                         <p>
                             <?php echo $feed['content'] ?>
                         </p>
-
-                    </div>
+                        
+                    </div>                                            
                     <footer>
                         <small>♥ <?php echo $feed['like_number'] ?></small>
                         <!-- <a href=""> <?php echo $feed['taglist'] ?> </a> -->
-                        <?php
+                        <?php 
                         $tags = explode(",", $feed['taglist']);
-                        foreach ($tags as $tag) { ?>
+                        foreach ($tags as $tag)
+                        { ?>
                             <a href=""><?php echo $tag ?></a>
                         <?php } ?>
                     </footer>
                 </article>
-            <?php } ?>
+                <?php } ?>
 
 
-        </main>
-    </div>
-</body>
-
+            </main>
+        </div>
+    </body>
 </html>
