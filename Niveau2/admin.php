@@ -1,4 +1,9 @@
 <!doctype html>
+
+<?php
+include('modules.php');
+?>
+
 <html lang="fr">
 
 <head>
@@ -11,22 +16,9 @@
 <body>
     <header>
         <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <nav id="menu">
-            <a href="news.php">Actualités</a>
-            <a href="wall.php?<?php $tag['id'] ?>">Mur</a>
-            <!--je me connecte en tant qu'untel sur le lien "wall"--->
-            <a href="feed.php?<?php $tag['id'] ?>">Flux</a>
-            <a href="tags.php?<?php echo $tag['label'] ?>">Mots-clés</a>
-        </nav>
-        <nav id="user">
-            <a href="#">Profil</a>
-            <ul>
-                <li><a href="settings.php?<?php $tag['id'] ?>">Paramètres</a></li>
-                <li><a href="followers.php?<?php $tag['id'] ?>">Mes suiveurs</a></li>
-                <li><a href="subscriptions.php?<?php $tag['id'] ?>">Mes abonnements</a></li>
-            </ul>
-
-        </nav>
+        <?php 
+            echo $navbar
+        ?>
     </header>
 
     <?php
