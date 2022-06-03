@@ -36,7 +36,7 @@ include('modules.php');
                 /**
                  * BD
                  */
-                $mysqli = new mysqli("localhost", "root", "root", "socialnetwork_tests");
+                $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
                 /**
                  * Récupération de la liste des auteurs
                  */
@@ -58,10 +58,10 @@ include('modules.php');
                     // on ne fait ce qui suit que si un formulaire a été soumis.
                     // Etape 2: récupérer ce qu'il y a dans le formulaire @todo: c'est là que votre travaille se situe
                     // observez le résultat de cette ligne de débug (vous l'effacerez ensuite)
-                    echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                    //echo "<pre>" . print_r($_POST, 1) . "</pre>";
                     // et complétez le code ci dessous en remplaçant les ???
-                    $authorId = $_POST['???'];
-                    $postContent = $_POST['???'];
+                    $authorId = $_POST['auteur'];
+                    $postContent = $_POST['message'];
 
 
                     //Etape 3 : Petite sécurité
@@ -70,13 +70,11 @@ include('modules.php');
                     $postContent = $mysqli->real_escape_string($postContent);
                     //Etape 4 : construction de la requete
                     $lInstructionSql = "INSERT INTO posts "
-                        . "(id, user_id, content, created, permalink, post_id) "
+                        . "(id, user_id, content, created) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
                         . "VALUES (NULL, "
                         . $authorId . ", "
                         . "'" . $postContent . "', "
-                        . "NOW(), "
-                        . "'', "
-                        . "NULL);";
+                        . "NOW());";
                     echo $lInstructionSql;
                     // Etape 5 : execution
                     $ok = $mysqli->query($lInstructionSql);
@@ -89,6 +87,7 @@ include('modules.php');
                 ?>
                 <form action="usurpedpost.php" method="post">
                     <input type='hidden' name='???' value='achanger'>
+                    <!---j'ai pas compris ce que fait cette ligne mais je crois qu'il ne faut pas changer ce qu'il y a entre guillements--->
                     <dl>
                         <dt><label for='auteur'>Auteur</label></dt>
                         <dd><select name='auteur'>
