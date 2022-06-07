@@ -59,6 +59,29 @@ include('modules.php');
         </aside>
         <main>
             <?php
+
+            $enCoursDeTraitement = isset($_POST['message']);
+            if ($enCoursDeTraitement) {
+                
+                $postContent = $_POST['message'];
+
+                $postContent = $mysqli->real_escape_string($postContent);
+
+                $lInstructionSql = "INSERT INTO posts "
+                    . "(id, user_id, content, created) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
+                    . "VALUES (NULL, "
+                    . $_SESSION['connected_id'] . ", "
+                    . "'" . $postContent . "', "
+                    . "NOW());";
+                //echo $lInstructionSql;
+                // Etape 5 : execution
+                $ok = $mysqli->query($lInstructionSql);
+                if (!$ok) {
+                    echo "Impossible d'ajouter le message: " . $mysqli->error;
+                } else {
+                    echo "Message posté";
+                }
+            }
             /**
              * Etape 3: récupérer tous les messages de l'utilisatrice
              */
@@ -77,6 +100,20 @@ include('modules.php');
             $lesInformations = $mysqli->query($laQuestionEnSql);
             if (!$lesInformations) {
                 echo ("Échec de la requete : " . $mysqli->error);
+            }
+
+
+            if ($_SESSION['connected_id'] == $userId) {
+            ?>
+            <form action="wall.php?user_id=<?php echo $_SESSION['connected_id']?>" method="post">
+                    <dl>
+                        <dt><label for='message'>Message</label></dt>
+                        <dd><textarea name='message'></textarea></dd>
+                    </dl>
+                    <input type='submit'>
+                </form>
+
+            <?php 
             }
 
             /**
