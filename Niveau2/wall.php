@@ -1,7 +1,6 @@
 <!doctype html>
 
 <?php
-session_start();
 include('modules.php');
 ?>
 
