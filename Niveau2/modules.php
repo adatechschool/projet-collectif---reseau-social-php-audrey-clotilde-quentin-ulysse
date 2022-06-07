@@ -1,4 +1,6 @@
-<?php 
+<?php
+    echo "<pre>" . print_r($_SESSION, 1) . "</pre>";
+
     $navbarfix = '
         <nav id="menu">
             <a href="news.php">Actualités</a>
