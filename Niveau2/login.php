@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <?php include('modules.php') ?>
 <!doctype html>
 <html lang="fr">
