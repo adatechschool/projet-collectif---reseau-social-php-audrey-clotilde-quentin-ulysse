@@ -14,7 +14,7 @@ $requeteAbonnement = "INSERT INTO followers "
                     . $_SESSION['connected_id'];
 
 #ICI ON EXECUTE LES REQUÊTES EN ECRITURE
-$enCoursAbonnement = isset($_GET['subscribe']);
+$enCoursAbonnement = isset($_POST['subscribe']);
 if ($enCoursAbonnement){
     $ok_subscribe = $mysqli->query($requeteAbonnement);    
 }
@@ -106,9 +106,9 @@ if ($enCoursAbonnement){
                         echo "<pre>" . print_r($connexionLink, 1) . "</pre>";
                         if (!$connexionLink) {
                 ?>
-                            <form action="wall.php?user_id=<?php echo $_SESSION['connected_id'] ?>" method="post">
+                            <form method="post">
                                 <dl>
-                                    <input type="button" value="Je m'abonne !" name="subscribe">
+                                    <input type="submit" value="Je m'abonne !" name="subscribe">
                                     <?php
                                         if ($enCoursAbonnement && !$ok_subscribe){
                                             echo "Déso, l'abonnement a échoué" . $mysqli->error;
