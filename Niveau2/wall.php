@@ -2,6 +2,22 @@
 
 <?php
 include('modules.php');
+
+#ICI ON ECRIT LES VARIABLES DE LA PAGE
+$userId = intval($_GET['user_id']);
+
+#ICI ON ECRIT LES STRINGS DES REQUÊTES
+$requeteAbonnement = "INSERT INTO followers "
+                    . "(id, followed_user_id, following_user_id) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
+                    . "VALUES (NULL, "
+                    . $userId .","
+                    . $_SESSION['connected_id'];
+
+#ICI ON EXECUTE LES REQUÊTES EN ECRITURE
+$enCoursAbonnement = isset($_GET['subscribe']);
+if ($enCoursAbonnement){
+    $ok_subscribe = $mysqli->query($requeteAbonnement);    
+}
 ?>
 
 <html lang="fr">
@@ -26,7 +42,7 @@ include('modules.php');
         /**
          * Etape 3: récupérer tous les messages de l'utilisatrice
          */
-        $userId = intval($_GET['user_id']);
+        
         $requeteMessages = "
                     SELECT posts.content, posts.created, users.alias as author_name, 
                     COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist 
@@ -90,10 +106,14 @@ include('modules.php');
                         echo "<pre>" . print_r($connexionLink, 1) . "</pre>";
                         if (!$connexionLink) {
                 ?>
-
                             <form action="wall.php?user_id=<?php echo $_SESSION['connected_id'] ?>" method="post">
                                 <dl>
-                                    <input type="button" value="Je m'abonne !">
+                                    <input type="button" value="Je m'abonne !" name="subscribe">
+                                    <?php
+                                        if ($enCoursAbonnement && !$ok_subscribe){
+                                            echo "Déso, l'abonnement a échoué" . $mysqli->error;
+                                        }
+                                    ?> 
                                 </dl>
                             </form>
                         <?php
@@ -106,36 +126,6 @@ include('modules.php');
                             </form>
                 <?php
                         }
-                    }
-                }
-                ?>
-
-
-
-
-
-
-                <?php
-                $enCoursAbonnement = isset($_POST['message']);
-                if ($enCoursAbonnement) {
-
-                    $postContent = $_POST['message'];
-
-                    $postContent = $mysqli->real_escape_string($postContent);
-
-                    $lInstructionSql = "INSERT INTO posts "
-                        . "(id, user_id, content, created) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
-                        . "VALUES (NULL, "
-                        . $_SESSION['connected_id'] . ", "
-                        . "'" . $postContent . "', "
-                        . "NOW());";
-                    //echo $lInstructionSql;
-                    // Etape 5 : execution
-                    $ok = $mysqli->query($lInstructionSql);
-                    if (!$ok) {
-                        echo "Impossible d'ajouter le message: " . $mysqli->error;
-                    } else {
-                        echo "Message posté";
                     }
                 }
                 ?>
