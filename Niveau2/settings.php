@@ -1,8 +1,11 @@
-<!doctype html>
+<?php include('modules.php');
+    if (!isset($_SESSION['connected_id'])) {
+    echo $_SESSION['connected_id'];
+    header("Location: login.php");
+    exit();
+} ?>
 
-<?php
-include('modules.php');
-?>
+<!doctype html>
 
 <html lang="fr">
 
