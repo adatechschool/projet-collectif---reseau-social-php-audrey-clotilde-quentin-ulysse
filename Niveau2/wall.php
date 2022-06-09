@@ -10,8 +10,9 @@ $userId = intval($_GET['user_id']);
 $requeteAbonnement = "INSERT INTO followers "
                     . "(id, followed_user_id, following_user_id) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
                     . "VALUES (NULL, "
-                    . $userId .","
-                    . $_SESSION['connected_id'];
+                    . $userId .", "
+                    . $_SESSION['connected_id']
+                    . ")";
 
 #ICI ON EXECUTE LES REQUÊTES EN ECRITURE
 $enCoursAbonnement = isset($_POST['subscribe']);
