@@ -32,12 +32,7 @@ include('modules.php');
          */
         $tagId = intval($_GET['tag_id']);
         ?>
-        <?php
-        /**
-         * Etape 2: se connecter à la base de donnée
-         */
-        $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
-        ?>
+
 
         <aside>
             <?php
@@ -90,24 +85,9 @@ include('modules.php');
              * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
              */
             while ($post = $lesInformations->fetch_assoc()) {
-
                 // echo "<pre>" . print_r($post, 1) . "</pre>";
-            ?>
-                <article>
-                    <h3>
-                        <time datetime=<?php echo $post['created'] ?>><?php echo $post['created'] ?></time>
-                    </h3>
-                    <address><?php echo $post['author_name'] ?></address>
-                    <div>
-                        <p><?php echo $post['content'] ?></p>
-                    </div>
-                    <footer>
-                        <small>♥ <?php echo $post['like_number'] ?></small>
-                        <a href=""><?php echo $post['taglist'] ?></a>,
-                        <!-- <a href=""><?php echo $post['taglist'] ?></a>, -->
-                    </footer>
-                </article>
-            <?php } ?>
+                create_post($post);
+             } ?>
 
 
         </main>
