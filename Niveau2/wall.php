@@ -68,13 +68,7 @@ if ($enCoursAbonnement){
         $userIsWallOwner = ($_SESSION['connected_id'] == $userId);
         $connectedID = $_SESSION['connected_id'];
         ?>
-        <?php
-        /**
-         * Etape 2: se connecter à la base de donnée
-         */
-        $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
-        ?>
-
+       
         <aside>
             <?php
             /**
