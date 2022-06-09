@@ -33,15 +33,15 @@ function create_post($post)
             <h3>
                 <time datetime=".$post['created'].">".$post['created']."</time>
             </h3>
-            <address>".$post.['author_name']."
+            <address>".$post['author_name']."
             </address>
             <div>
-                <p>".$post.['content']."</p>
+                <p>".$post['content']."</p>
             </div>
             <footer>
-                <small>".$post['like_number']."</small>
+                <small>♥ ".$post['like_number']."</small>
                 <a href=".$post['taglist'].">".$post['taglist']."</a>
-                <a href=''></a>,
+                <a href=''></a>
             </footer>
         </article>"
     );
