@@ -67,6 +67,7 @@ include('modules.php');
             $laQuestionEnSql = "
                     SELECT posts.content,
                     posts.created,
+                    users.id as author_id,
                     users.alias as author_name,  
                     count(likes.id) as like_number,  
                     GROUP_CONCAT(DISTINCT tags.label) AS taglist 
@@ -102,7 +103,8 @@ include('modules.php');
                         </time>
                     </h3>
                     <address>
-                        <?php echo $feed['author_name'] ?>
+                        <a href="wall.php?user_id=<?php echo $feed['author_id'] ?>"><?php echo $feed['author_name'] ?></a>
+                        
                     </address>
                     <div>
                         <p>

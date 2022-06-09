@@ -44,4 +44,34 @@ function navbar_link($link, $name)
     return $output;
 };
 
+function display_tags_in_post($taglist)
+{
+    $tags = explode(",", $taglist);
+    $outcome = "";
+    foreach ($tags as $tag){
+        $outcome = $outcome . "<a href =''>#" . $tag . "</a> ";
+    }
+    return $outcome;
+}
+
+function create_post($post)
+{
+    echo(
+        "<article>
+            <h3>
+                <time datetime=".$post['created'].">".$post['created']."</time>
+            </h3>
+            <address>".$post['author_name']."
+            </address>
+            <div>
+                <p>".$post['content']."</p>
+            </div>
+            <footer>
+                <small>♥ ".$post['like_number']."</small>" .
+                display_tags_in_post($post['taglist']) .
+            "</footer>
+        </article>"
+    );
+}
+
 ?>
