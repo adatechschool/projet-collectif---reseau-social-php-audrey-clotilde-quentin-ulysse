@@ -19,7 +19,7 @@
 <body>
 
     <header>
-        <img src="resoc.jpg" alt="Logo de notre réseau social" />
+        <!-- <img src="resoc.jpg" alt="Logo de notre réseau social" /> -->
         <?php echo $navbar ?>
     </header>
 
@@ -57,7 +57,7 @@
             ?>
                 <article>
                     <img src="user.jpg" alt="blason" />
-                    <a href="wall.php?user_id=<?php echo $follower['id']?>"><?php echo $follower['alias']?></a>
+                    <a href="wall.php?user_id=<?php echo $follower['id'] ?>"><?php echo $follower['alias'] ?></a>
                     <p>id: <?php echo $follower['id'] ?></p>
                 </article>
             <?php } ?>
