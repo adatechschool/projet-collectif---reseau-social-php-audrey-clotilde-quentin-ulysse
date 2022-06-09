@@ -14,9 +14,9 @@ include('modules.php');
     <body>
         <header>
             <!-- <img src="resoc.jpg" alt="Logo de notre réseau social"/> -->
-            <!-- <?php 
+             <?php 
                 echo $navbar
-            ?> -->
+            ?>
         </header>
         <div id="wrapper">
             <?php

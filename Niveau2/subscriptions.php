@@ -13,7 +13,7 @@ include('modules.php');
     </head>
     <body>
     <header>
-        <img src="resoc.jpg" alt="Logo de notre réseau social" />
+        <!-- <img src="resoc.jpg" alt="Logo de notre réseau social" /> -->
         <?php 
             echo $navbar
         ?>
