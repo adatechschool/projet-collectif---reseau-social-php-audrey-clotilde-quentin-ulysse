@@ -1,8 +1,0 @@
-REFACTO:
-- appel BDD
-- navbar sur les nouvelles pages niveau 2 (login, registration, usurpedpost)
-- v2 navbar : passer de la version en dur à une version dynamique (avec une fonction)
-
-NOUVELLES FONCTIONNALITÉS:
-- ajouter un lien vers mur utilisateur à chaque fois qu'un utilisateur est cité (refacto tout de suite ?)
-- ajouter inscription
