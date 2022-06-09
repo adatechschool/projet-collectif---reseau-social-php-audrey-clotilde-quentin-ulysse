@@ -1,8 +1,11 @@
-<!doctype html>
+<?php include('modules.php');
+    if (!isset($_SESSION['connected_id'])) {
+    echo $_SESSION['connected_id'];
+    header("Location: login.php");
+    exit();
+} ?>
 
-<?php
-include('modules.php');
-?>
+<!doctype html>
 
 <html lang="fr">
     <head>
@@ -13,8 +16,8 @@ include('modules.php');
     </head>
     <body>
         <header>
-            <img src="resoc.jpg" alt="Logo de notre réseau social"/>
-            <?php 
+            <!-- <img src="resoc.jpg" alt="Logo de notre réseau social"/> -->
+             <?php 
                 echo $navbar
             ?>
         </header>
