@@ -89,41 +89,10 @@ include('modules.php');
                  * A vous de retrouver comment faire la boucle while de parcours...
                  */
                 while ($feed = $lesInformations->fetch_assoc())
-                {
-
+                { 
                     //echo "<pre>" . print_r($feed, 1) . "</pre>";
-                ?>
-                    
-                    
-                <article>
-                    <h3>
-                        <time datetime=
-                            <?php echo $feed['created'] ?>
-                        >
-                            <?php echo $feed['created'] ?>
-                        </time>
-                    </h3>
-                    <address>
-                        <?php echo $feed['author_name'] ?>
-                    </address>
-                    <div>
-                        <p>
-                            <?php echo $feed['content'] ?>
-                        </p>
-                        
-                    </div>                                            
-                    <footer>
-                        <small>♥ <?php echo $feed['like_number'] ?></small>
-                        <!-- <a href=""> <?php echo $feed['taglist'] ?> </a> -->
-                        <?php 
-                        $tags = explode(",", $feed['taglist']);
-                        foreach ($tags as $tag)
-                        { ?>
-                            <a href=""><?php echo $tag ?></a>
-                        <?php } ?>
-                    </footer>
-                </article>
-                <?php } ?>
+                    create_post($feed);
+                } ?>
 
 
             </main>
