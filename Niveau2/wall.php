@@ -88,14 +88,14 @@ if ($enCoursAbonnement){
                     (n°<?php echo $userId ?>)
                 </p>
                 <?php
+                //VERIFICATION DU STATUT D'ABONNEMENT POUR PRÉSENTER LE BON BOUTON
                 $requeteCheckAbonnes = "
                 SELECT * 
                 FROM followers 
                 WHERE followers.following_user_id='$connectedID' AND followers.followed_user_id='$userId'";
-
-
-                if (!$userIsWallOwner) {
-                    if ($connectedID) {
+                
+                if (!$userIsWallOwner) { //L'utilisateur ne peut pas s'abonner à lui-même
+                    if ($connectedID) { //L'utilisateur ne peut s'abonner que s'il est connecté
                         $isConnected = $mysqli->query($requeteCheckAbonnes);
                         $connexionLink = $isConnected->fetch_assoc(); #le résultat de la requête est comme une promesse donc il faut un fetch_assoc() pour récupérer une donnée utilisable.
                         echo "<pre>" . print_r($connexionLink, 1) . "</pre>";
@@ -136,16 +136,16 @@ if ($enCoursAbonnement){
 
                 $postContent = $mysqli->real_escape_string($postContent);
 
-                $lInstructionSql = "INSERT INTO posts "
+                $requeteEcritureArticle = "INSERT INTO posts "
                     . "(id, user_id, content, created) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
                     . "VALUES (NULL, "
                     . $_SESSION['connected_id'] . ", "
                     . "'" . $postContent . "', "
                     . "NOW());";
-                //echo $lInstructionSql;
+                //echo $requeteEcritureArticle;
                 // Etape 5 : execution
-                $ok = $mysqli->query($lInstructionSql);
-                if (!$ok) {
+                $ok_ecritureArticle = $mysqli->query($requeteEcritureArticle);
+                if (!$ok_ecritureArticle) {
                     echo "Impossible d'ajouter le message: " . $mysqli->error;
                 } else {
                     echo "Message posté";
