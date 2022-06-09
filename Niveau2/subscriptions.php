@@ -1,3 +1,8 @@
+<?php if (!$_SESSION['connected_id']) {
+    header("Location: login.php");
+    exit();
+} ?>
+
 <!doctype html>
 
 <?php include('modules.php');?>
