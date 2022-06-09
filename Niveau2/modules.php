@@ -23,6 +23,21 @@
         </nav>
         ';
 
+    if (!$_SESSION['connected_id']) {
+        $navbarfix = '
+        <nav id="menu">
+            <a href="news.php">Actualités</a>
+            <a href="wall.php?user_id=5">Mur</a>
+            <a href="feed.php?user_id=5">Flux</a>
+            <a href="tags.php?tag_id=1">Mots-clés</a>
+        </nav>
+        <nav id="user">
+            <a href="login.php">Connexion</a>
+
+        </nav>
+        ';
+    };
+
     $navbar = $navbarfix;    
 
     $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");

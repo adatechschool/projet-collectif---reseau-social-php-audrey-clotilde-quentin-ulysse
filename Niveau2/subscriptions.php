@@ -1,8 +1,6 @@
 <!doctype html>
 
-<?php
-include('modules.php');
-?>
+<?php include('modules.php');?>
 
 <html lang="fr">
     <head>
