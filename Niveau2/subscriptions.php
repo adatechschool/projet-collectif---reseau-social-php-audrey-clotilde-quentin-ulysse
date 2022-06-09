@@ -54,7 +54,7 @@ include('modules.php');
                 ?>
                 <article>
                     <img src="user.jpg" alt="blason"/>
-                    <h3><?php echo $userName['alias']?></h3>
+                    <a href="wall.php?user_id=<?php echo $userName['id']?>"><?php echo $userName['alias']?></a>
                     <p>id:<?php echo $userName['id']?></p>                    
                 </article>
                 <?php } ?>                    
