@@ -16,14 +16,22 @@ $navbar = '
 
 </nav>';
 
-$postthree = '<p>Ca pourrait marcher/<p>';
-
 $mysqli = new mysqli("localhost", "root", "root", "socialnetwork");
 
 function navbar_link($link, $name)
 {
     $output = "<a href=$link>$name</a>";
     return $output;
+}
+
+function display_tags_in_post($taglist)
+{
+    $tags = explode(",", $taglist);
+    $outcome = "";
+    foreach ($tags as $tag){
+        $outcome = $outcome . "<a href =''>#" . $tag . "</a> ";
+    }
+    return $outcome;
 }
 
 function create_post($post)
@@ -39,21 +47,14 @@ function create_post($post)
                 <p>".$post['content']."</p>
             </div>
             <footer>
-                <small>♥ ".$post['like_number']."</small>
-                <a href=".$post['taglist'].">".$post['taglist']."</a>
-                <a href=''></a>
-            </footer>
+                <small>♥ ".$post['like_number']."</small>" .
+                display_tags_in_post($post['taglist']) .
+            "</footer>
         </article>"
     );
 }
 
-function create_post2()
-{
-    return "Il se passe quelque chose ici";
-}
-
-
-
+//DEBUG
 $debug_article = ['created' => '22/03/2022', 'author_name' => 'Quentin', 'content' => 'Ceci est le contenu de mon article', 'like_number' => 8, 'taglist' => 'debug,test']
 
 ?>
