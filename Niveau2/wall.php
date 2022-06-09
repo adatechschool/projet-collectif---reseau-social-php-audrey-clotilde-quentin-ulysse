@@ -8,16 +8,16 @@ $userId = intval($_GET['user_id']);
 
 #ICI ON ECRIT LES STRINGS DES REQUÊTES
 $requeteAbonnement = "INSERT INTO followers "
-    . "(id, followed_user_id, following_user_id) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
-    . "VALUES (NULL, "
-    . $userId . ", "
-    . $_SESSION['connected_id']
-    . ")";
+                    . "(id, followed_user_id, following_user_id) " //ajouter dans la table les colonnes permalink et post_id et leur faire correspondre le lien du post (URL) et id du post ou supprimer ces colonnes et leurs valeurs dans le code. 
+                    . "VALUES (NULL, "
+                    . $userId .", "
+                    . $_SESSION['connected_id']
+                    . ")";
 
 #ICI ON EXECUTE LES REQUÊTES EN ECRITURE
 $enCoursAbonnement = isset($_POST['subscribe']);
-if ($enCoursAbonnement) {
-    $ok_subscribe = $mysqli->query($requeteAbonnement);
+if ($enCoursAbonnement){
+    $ok_subscribe = $mysqli->query($requeteAbonnement);    
 }
 ?>
 
@@ -32,8 +32,8 @@ if ($enCoursAbonnement) {
 
 <body>
     <header>
-        <!-- <img src="resoc.jpg" alt="Logo de notre réseau social" />
-        <?php
+        <!-- <img src="resoc.jpg" alt="Logo de notre réseau social" /> -->
+        <!-- <?php
         echo $navbar
         ?> -->
     </header>
@@ -43,7 +43,7 @@ if ($enCoursAbonnement) {
         /**
          * Etape 3: récupérer tous les messages de l'utilisatrice
          */
-
+        
         $requeteMessages = "
                     SELECT posts.content, posts.created, users.alias as author_name, 
                     COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist 
@@ -111,10 +111,10 @@ if ($enCoursAbonnement) {
                                 <dl>
                                     <input type="submit" value="Je m'abonne !" name="subscribe">
                                     <?php
-                                    if ($enCoursAbonnement && !$ok_subscribe) {
-                                        echo "Déso, l'abonnement a échoué" . $mysqli->error;
-                                    }
-                                    ?>
+                                        if ($enCoursAbonnement && !$ok_subscribe){
+                                            echo "Déso, l'abonnement a échoué" . $mysqli->error;
+                                        }
+                                    ?> 
                                 </dl>
                             </form>
                         <?php
