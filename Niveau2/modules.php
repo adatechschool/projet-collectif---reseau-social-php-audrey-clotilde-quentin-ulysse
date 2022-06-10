@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo "<pre>" . print_r($_SESSION, 1) . "</pre>";
+//echo "<pre>" . print_r($_SESSION, 1) . "</pre>";
 $urlId = $_SESSION['connected_id'];
 
 $navbar = '
@@ -42,20 +42,30 @@ function navbar_link($link, $name)
 {
     $output = "<a href=$link>$name</a>";
     return $output;
-};
+}
 
 function display_tags_in_post($taglist)
 {
     $tags = explode(",", $taglist);
     $outcome = "";
     foreach ($tags as $tag){
-        $outcome = $outcome . "<a href =''>#" . $tag . "</a> ";
+        $requeteTagId = " SELECT id FROM tags WHERE label = '$tag' ";
+        global $mysqli;
+        $tagIdList = $mysqli->query($requeteTagId);
+        if (!$tagIdList) {
+            echo "Impossible d'ajouter le message: " . $mysqli->error;
+        }
+        $tagIdFetch = $tagIdList->fetch_assoc();
+        //echo "<pre>" . print_r($tagIdFetch, 1) . "</pre>";
+        $id = $tagIdFetch['id'];
+        $outcome = $outcome . "<a href ='tags.php?tag_id=" . $id . "'>#" . $tag . "</a> ";
     }
     return $outcome;
 }
 
 function create_post($post)
 {
+    if (isset($post['taglist'])) {
     echo(
         "<article>
             <h3>
@@ -67,11 +77,28 @@ function create_post($post)
                 <p>".$post['content']."</p>
             </div>
             <footer>
-                <small>♥ ".$post['like_number']."</small>" .
-                display_tags_in_post($post['taglist']) .
-            "</footer>
+                <small>♥ ".$post['like_number']."</small>"
+                . display_tags_in_post($post['taglist'])
+            . "</footer>
         </article>"
-    );
+    ); } else {
+    
+    echo(
+        "<article>
+            <h3>
+                <time datetime=".$post['created'].">".$post['created']."</time>
+            </h3>
+            <address>".$post['author_name']."
+            </address>
+            <div>
+                <p>".$post['content']."</p>
+            </div>
+            <footer>
+                <small>♥ ".$post['like_number']."</small>"
+            . "</footer>
+        </article>"
+    );};
+
 }
 
 ?>
